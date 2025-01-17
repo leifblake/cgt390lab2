@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Practice</title>
+  <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      background-color: #f06292;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #d81b60;
+    }
+  </style>
+</head>
+<body>
+  <h1>CGT 390 Lab 2 | JavaScript Practice</h1>
+  <div>
+    <ul id="itemList"></ul>
+    <button id="deleteAllBtn">Delete All</button>
+    <button id="deleteOneBtn">Delete One Item</button>
+  </div>
+
+  <script>
+    // Array of items
+    const items = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry', 'Fig', 'Grape'];
+
+    // Reference to the unordered list
+    const itemList = document.getElementById('itemList');
+
+    // Reference to the buttons
+    const deleteAllBtn = document.getElementById('deleteAllBtn');
+    const deleteOneBtn = document.getElementById('deleteOneBtn');
+
+    // Function to create list items with random colors
+    function populateList() {
+      items.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        li.style.backgroundColor = getRandomColor();
+        itemList.appendChild(li);
+      });
+    }
+
+    // Function to generate a random color
+    function getRandomColor() {
+      const a = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      const c = Math.floor(Math.random() * 256);
+      return `rgb(${a}, ${b}, ${c})`;
+    }
+
+    // Event listener for the "Delete All" button
+    deleteAllBtn.addEventListener('click', () => {
+      itemList.innerHTML = ''; // Remove all list items
+      deleteAllBtn.textContent = 'No items'; // Update button text
+    });
+
+    // Event listener for the "Delete One Item" button
+    deleteOneBtn.addEventListener('click', () => {
+      if (itemList.firstChild) {
+        itemList.removeChild(itemList.firstChild); // Remove the first list item
+      }
+    });
+
+    // Populate the list on page load
+    populateList();
+  </script>
+</body>
+</html>
